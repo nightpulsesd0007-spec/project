@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luxury Stays Hotel — Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <h1>Luxury Stays</h1>
+    <p>Hotel Management</p>
+  </div>
+  <nav>
+    <div class="nav-section-label">Main</div>
+    <button class="nav-item active" onclick="showPage('dashboard',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Dashboard
+    </button>
+    <button class="nav-item" onclick="showPage('rooms',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Rooms
+    </button>
+    <button class="nav-item" onclick="showPage('bookings',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Bookings
+      <span class="nav-badge">3</span>
+    </button>
+    <button class="nav-item" onclick="showPage('guests',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      Guests
+    </button>
+    <div class="nav-section-label" style="margin-top:12px">Finance</div>
+    <button class="nav-item" onclick="showPage('revenue',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      Revenue
+    </button>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="staff-card">
+      <div class="avatar">SD</div>
+      <div>
+        <div class="staff-name">Simon David</div>
+        <div class="staff-role">Front Desk Manager</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- Main -->
+<main class="main">
+
+  <!-- ── DASHBOARD ── -->
+  <div id="page-dashboard" class="page active">
+    <div class="topbar">
+      <div>
+        <div class="page-title">Good morning, Luxury Stays</div>
+        <div class="page-subtitle">Tuesday, 6 May 2026 · Here's today's overview</div>
+      </div>
+      <div class="topbar-right">
+        <button class="btn btn-primary" onclick="openModal('booking-modal')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          New Booking
+        </button>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card gold">
+        <div class="stat-label">Total Rooms</div>
+        <div class="stat-value">48</div>
+        <div class="stat-sub">Across 4 floors</div>
+        <div class="stat-icon">🏨</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-label">Occupancy Rate</div>
+        <div class="stat-value">72%</div>
+        <div class="stat-sub">35 of 48 occupied</div>
+        <div class="stat-icon">✓</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-label">Check-ins Today</div>
+        <div class="stat-value">8</div>
+        <div class="stat-sub">3 more expected</div>
+        <div class="stat-icon">↓</div>
+      </div>
+      <div class="stat-card warn">
+        <div class="stat-label">Revenue Today</div>
+        <div class="stat-value">₹1.2L</div>
+        <div class="stat-sub">+18% vs yesterday</div>
+        <div class="stat-icon">₹</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <!-- Occupancy Ring -->
+      <div class="panel">
+  <div class="section-header"><span class="section-title">Room Status</span></div>
+  <div class="ring-wrap">
+    
+    <div class="ring-container">
+      <svg class="ring-svg" width="120" height="120" viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="48" fill="none" stroke="#333" stroke-width="14"/>
+        <circle cx="60" cy="60" r="48" fill="none" stroke="#E05252" stroke-width="14" stroke-dasharray="216 86" stroke-dashoffset="0" stroke-linecap="round"/>
+        <circle cx="60" cy="60" r="48" fill="none" stroke="#52B788" stroke-width="14" stroke-dasharray="77 225" stroke-dashoffset="-216" stroke-linecap="round"/>
+        <circle cx="60" cy="60" r="48" fill="none" stroke="#5B9BD5" stroke-width="14" stroke-dasharray="28 274" stroke-dashoffset="-293" stroke-linecap="round"/>
+        <circle cx="60" cy="60" r="48" fill="none" stroke="#E09652" stroke-width="14" stroke-dasharray="20 282" stroke-dashoffset="-321" stroke-linecap="round"/>
+      </svg>
+      
+      <div class="ring-center">
+        <div style="font-size:22px; font-weight:700;">48</div>
+        <div style="font-size:10px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px;">Rooms</div>
+      </div>
+    </div>
+
+    <div class="ring-legend" style="margin-top: 20px;">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--danger)"></div>Occupied — 34</div>
+      </div>
+    
+  </div>
+</div>
+      <!-- Recent Activity -->
+      <div class="panel">
+        <div class="section-header"><span class="section-title">Recent Activity</span></div>
+        <div class="activity-list">
+          <div class="activity-item">
+            <div class="activity-dot" style="background:var(--success)"></div>
+            <div>
+              <div class="activity-text"><strong>Priya Sharma</strong> checked into Room 304</div>
+              <div class="activity-time">9 minutes ago</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot" style="background:var(--danger)"></div>
+            <div>
+              <div class="activity-text"><strong>Room 210</strong> marked for housekeeping</div>
+              <div class="activity-time">23 minutes ago</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot" style="background:var(--gold)"></div>
+            <div>
+              <div class="activity-text"><strong>New booking</strong> from Rahul Mehta — Suite 501</div>
+              <div class="activity-time">1 hour ago</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot" style="background:var(--info)"></div>
+            <div>
+              <div class="activity-text"><strong>Akshita</strong> checked out from Room 108</div>
+              <div class="activity-time">2 hours ago</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot" style="background:var(--warn)"></div>
+            <div>
+              <div class="activity-text"><strong>Room 415</strong> maintenance request filed</div>
+              <div class="activity-time">3 hours ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weekly Revenue Chart -->
+    <div class="panel">
+      <div class="section-header">
+        <span class="section-title">Weekly Revenue (₹)</span>
+        <span style="font-size:12px;color:var(--text-muted)">This week</span>
+      </div>
+      <div class="chart-bars" id="revenue-chart"></div>
+      <div style="display:flex;justify-content:space-between;padding:0 4px;margin-top:8px" id="chart-labels"></div>
+    </div>
+  </div>
+
+  <!-- ── ROOMS ── -->
+  <div id="page-rooms" class="page">
+    <div class="topbar">
+      <div>
+        <div class="page-title">Rooms</div>
+        <div class="page-subtitle">48 rooms · Floor 1–4</div>
+      </div>
+      <div class="topbar-right">
+        <button class="btn btn-ghost" onclick="showToast('Room report exported!')">Export</button>
+        <button class="btn btn-primary" onclick="openModal('booking-modal')">+ New Booking</button>
+      </div>
+    </div>
+
+    <div class="room-filters">
+      <button class="filter-pill active" onclick="filterRooms('all',this)">All (48)</button>
+      <button class="filter-pill" onclick="filterRooms('available',this)">Available (8)</button>
+      <button class="filter-pill" onclick="filterRooms('occupied',this)">Occupied (34)</button>
+      <button class="filter-pill" onclick="filterRooms('cleaning',this)">Cleaning (4)</button>
+      <button class="filter-pill" onclick="filterRooms('reserved',this)">Reserved (2)</button>
+    </div>
+
+    <div class="rooms-grid" id="rooms-grid"></div>
+  </div>
+
+  <!-- ── BOOKINGS ── -->
+  <div id="page-bookings" class="page">
+    <div class="topbar">
+      <div>
+        <div class="page-title">Bookings</div>
+        <div class="page-subtitle">All reservations</div>
+      </div>
+      <div class="topbar-right">
+        <button class="btn btn-primary" onclick="openModal('booking-modal')">+ New Booking</button>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('all-bookings',this)">All</button>
+      <button class="tab" onclick="switchTab('today-bookings',this)">Today</button>
+      <button class="tab" onclick="switchTab('upcoming-bookings',this)">Upcoming</button>
+    </div>
+
+    <div class="panel">
+      <table>
+        <thead>
+          <tr>
+            <th>Guest</th>
+            <th>Room</th>
+            <th>Check-in</th>
+            <th>Check-out</th>
+            <th>Nights</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="bookings-table"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── GUESTS ── -->
+  <div id="page-guests" class="page">
+    <div class="topbar">
+      <div>
+        <div class="page-title">Guests</div>
+        <div class="page-subtitle">Guest registry</div>
+      </div>
+      <div class="topbar-right">
+        <button class="btn btn-primary" onclick="openModal('guest-modal')">+ Add Guest</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Room</th>
+            <th>ID Type</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="guests-table"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── REVENUE ── -->
+  <div id="page-revenue" class="page">
+    <div class="topbar">
+      <div>
+        <div class="page-title">Revenue</div>
+        <div class="page-subtitle">Financial overview</div>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card gold">
+        <div class="stat-label">Monthly Revenue</div>
+        <div class="stat-value">₹18.4L</div>
+        <div class="stat-sub">May 2026</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-label">Average Daily Rate</div>
+        <div class="stat-value">₹6,240</div>
+        <div class="stat-sub">Per room / night</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-label">RevPAR</div>
+        <div class="stat-value">₹4,493</div>
+        <div class="stat-sub">Revenue per available room</div>
+      </div>
+      <div class="stat-card warn">
+        <div class="stat-label">Pending Dues</div>
+        <div class="stat-value">₹84K</div>
+        <div class="stat-sub">4 invoices outstanding</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <div class="section-header"><span class="section-title">Revenue by Room Type</span></div>
+        <table>
+          <thead><tr><th>Type</th><th>Rooms</th><th>Revenue</th><th>Occupancy</th></tr></thead>
+          <tbody>
+            <tr><td>Standard</td><td>20</td><td>₹6.2L</td><td><span class="badge badge-success">78%</span></td></tr>
+            <tr><td>Deluxe</td><td>16</td><td>₹7.8L</td><td><span class="badge badge-success">81%</span></td></tr>
+            <tr><td>Suite</td><td>8</td><td>₹3.2L</td><td><span class="badge badge-warn">62%</span></td></tr>
+            <tr><td>Presidential</td><td>4</td><td>₹1.2L</td><td><span class="badge badge-danger">50%</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="panel">
+        <div class="section-header"><span class="section-title">Outstanding Invoices</span></div>
+        <table>
+          <thead><tr><th>Guest</th><th>Room</th><th>Amount</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Ravi Gupta</td><td>501</td><td>₹28,000</td><td><span class="badge badge-danger">Overdue</span></td></tr>
+            <tr><td>Anita Roy</td><td>220</td><td>₹14,400</td><td><span class="badge badge-warn">Pending</span></td></tr>
+            <tr><td>Mohit Jain</td><td>312</td><td>₹21,600</td><td><span class="badge badge-warn">Pending</span></td></tr>
+            <tr><td>Simran Kaur</td><td>105</td><td>₹20,000</td><td><span class="badge badge-info">Processing</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ── NEW BOOKING MODAL ── -->
+<div class="modal-overlay" id="booking-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">New Booking</div>
+      <button class="modal-close" onclick="closeModal('booking-modal')">✕</button>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">First Name</label><input class="form-input" id="b-first" placeholder="Simon"></div>
+      <div class="form-group"><label class="form-label">Last Name</label><input class="form-input" id="b-last" placeholder="David"></div>
+    </div>
+    <div class="form-group"><label class="form-label">Phone</label><input class="form-input" id="b-phone" placeholder="+91 98765 43210"></div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Room Type</label>
+        <select class="form-select" id="b-type">
+          <option>Standard</option><option>Deluxe</option><option>Suite</option><option>Presidential</option>
+        </select>
+      </div>
+      <div class="form-group"><label class="form-label">Room Number</label>
+        <select class="form-select" id="b-room">
+          <option>101</option><option>102</option><option>204</option><option>308</option><option>410</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Check-in</label><input class="form-input" id="b-in" type="date"></div>
+      <div class="form-group"><label class="form-label">Check-out</label><input class="form-input" id="b-out" type="date"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('booking-modal')">Cancel</button>
+      <button class="btn btn-primary" onclick="addBooking()">Confirm Booking</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── ADD GUEST MODAL ── -->
+<div class="modal-overlay" id="guest-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Add Guest</div>
+      <button class="modal-close" onclick="closeModal('guest-modal')">✕</button>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">First Name</label><input class="form-input" id="g-first" placeholder="Priya"></div>
+      <div class="form-group"><label class="form-label">Last Name</label><input class="form-input" id="g-last" placeholder="Sharma"></div>
+    </div>
+    <div class="form-group"><label class="form-label">Phone</label><input class="form-input" id="g-phone" placeholder="+91 99999 00000"></div>
+    <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="g-email" placeholder="priya@example.com"></div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Room</label><input class="form-input" id="g-room" placeholder="204"></div>
+      <div class="form-group"><label class="form-label">ID Type</label>
+        <select class="form-select" id="g-id">
+          <option>Aadhaar</option><option>PAN</option><option>Passport</option><option>Driving Licence</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('guest-modal')">Cancel</button>
+      <button class="btn btn-primary" onclick="addGuest()">Add Guest</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── ROOM DETAIL MODAL ── -->
+<div class="modal-overlay" id="room-modal">
+  <div class="modal" style="width:360px">
+    <div class="modal-header">
+      <div class="modal-title" id="room-modal-title">Room 101</div>
+      <button class="modal-close" onclick="closeModal('room-modal')">✕</button>
+    </div>
+    <div id="room-modal-body"></div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('room-modal')">Close</button>
+      <button class="btn btn-primary" onclick="openModal('booking-modal');closeModal('room-modal')">Book Room</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
